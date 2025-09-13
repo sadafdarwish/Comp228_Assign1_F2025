@@ -1,0 +1,8 @@
+package com.sd.week1.assign1;
+
+public class CadToUsdConverter {
+    // rate = USD per 1 CAD
+    public double convert(double cadAmount, double usdPerCadRate) {
+        return cadAmount * usdPerCadRate;
+    }
+}

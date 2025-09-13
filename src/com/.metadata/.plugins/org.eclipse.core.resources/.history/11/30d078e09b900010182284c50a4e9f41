@@ -1,0 +1,10 @@
+package com.sd.week1.assign1;
+
+public class LitersToGallonsConverter {
+    private static final double GALLONS_PER_LITER = 0.264172;
+
+    public double toGallons(double liters) {
+        return liters * GALLONS_PER_LITER;
+    }
+}
+

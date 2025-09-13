@@ -1,0 +1,82 @@
+package com.sd.week1.assign1;
+
+import java.util.Scanner;
+
+public class DriverMain {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create objects for tasks
+        GradeCalculation gradeCalc = new GradeCalculation();
+        MilesToKmConverter milesToKm = new MilesToKmConverter();
+        LitersToGallonsConverter litersToGallons = new LitersToGallonsConverter();
+        CadToUsdConverter cadToUsd = new CadToUsdConverter();
+
+        while (true) {
+            System.out.println("\n=== Assignment 1 Menu ===");
+            System.out.println("1) Calculate Grade (A/B/C/D/F)");
+            System.out.println("2) Convert Miles to Kilometers");
+            System.out.println("3) Convert Liters to Gallons");
+            System.out.println("4) Convert CAD to USD");
+            System.out.println("0) Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Try again.");
+                continue;
+            }
+
+            switch (choice) {
+                case 1 -> {
+                    double percent = readDouble(sc, "Enter percentage (0–100): ");
+                    if (percent < 0 || percent > 100) {
+                        System.out.println("Percentage out of range. Try again.");
+                        break;
+                    }
+                    String letter = gradeCalc.calculateLetterGrade(percent);
+                    System.out.println("Final Grade: " + letter);
+                }
+                case 2 -> {
+                    double miles = readDouble(sc, "Enter miles: ");
+                    double km = milesToKm.toKilometers(miles);
+                    System.out.printf("%.2f miles = %.2f kilometers%n", miles, km);
+                }
+                case 3 -> {
+                    double liters = readDouble(sc, "Enter liters: ");
+                    double gallons = litersToGallons.toGallons(liters);
+                    System.out.printf("%.2f liters = %.2f gallons%n", liters, gallons);
+                }
+                case 4 -> {
+                    double cad = readDouble(sc, "Enter CAD amount: ");
+                    double rate = readDouble(sc, "Enter today’s exchange rate (USD per 1 CAD): ");
+                    double usd = cadToUsd.convert(cad, rate);
+                    System.out.printf("%.2f CAD = %.2f USD%n", cad, usd);
+                }
+                case 0 -> {
+                    System.out.println("Goodbye!");
+                    sc.close();
+                    return;
+                }
+                default -> System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    private static double readDouble(Scanner sc, String prompt) {
+        System.out.print(prompt);
+        while (true) {
+            String line = sc.nextLine().trim();
+            try {
+                return Double.parseDouble(line);
+            } catch (NumberFormatException e) {
+                System.out.print("Enter a valid number: ");
+            }
+        }
+    }
+}
+
+

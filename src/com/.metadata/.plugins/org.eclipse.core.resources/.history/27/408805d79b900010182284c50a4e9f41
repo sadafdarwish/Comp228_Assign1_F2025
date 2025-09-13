@@ -1,0 +1,10 @@
+package com.sd.week1.assign1;
+
+public class MilesToKmConverter {
+    private static final double KM_PER_MILE = 1.609344;
+
+    public double toKilometers(double miles) {
+        return miles * KM_PER_MILE;
+    }
+}
+
